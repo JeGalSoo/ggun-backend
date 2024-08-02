@@ -9,7 +9,7 @@ import reactor.core.publisher.Mono;
 
 
 @Repository
-public interface UserRepository extends ReactiveMongoRepository<UserModel, Long> {
+public interface UserRepository extends ReactiveMongoRepository<UserModel, String> {
 
     Flux<UserModel> findByLastName(String lastName);
 

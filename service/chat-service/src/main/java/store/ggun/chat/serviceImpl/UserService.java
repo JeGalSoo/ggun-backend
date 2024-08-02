@@ -41,7 +41,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findByEmail(email);
     }
 
-    public Mono<UserModel> getUserDetailById(Long id) {
+    public Mono<UserModel> getUserDetailById(String id) {
         return userRepository.findById(id);
     }
 
@@ -51,7 +51,7 @@ public class UserService implements UserDetailsService {
                 ;
     }
 
-    public Mono<UserModel> updateUser(Long id, UserModel userModel) {
+    public Mono<UserModel> updateUser(String id, UserModel userModel) {
         return userRepository.findById(id).map(Optional::of).defaultIfEmpty(Optional.empty())
                 .flatMap(optionalUser -> {
                     if (optionalUser.isPresent()) {
@@ -63,7 +63,7 @@ public class UserService implements UserDetailsService {
                 });
     }
 
-    public Mono<Void> deleteUser(Long id) {
+    public Mono<Void> deleteUser(String id) {
         return userRepository.deleteById(id);
     }
 

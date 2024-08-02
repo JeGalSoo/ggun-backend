@@ -50,7 +50,7 @@ public class UserController {
 
     @GetMapping("/detail/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Mono<UserModel> getUserById(@PathVariable("userId") Long userId) {
+    public Mono<UserModel> getUserById(@PathVariable("userId") String userId) {
         return userService.getUserDetailById(userId);
     }
 
@@ -62,13 +62,13 @@ public class UserController {
 
     @PutMapping("/update/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Mono<UserModel> updateUser(@PathVariable("id") Long id, @RequestBody UserModel userModel) {
+    public Mono<UserModel> updateUser(@PathVariable("id") String id, @RequestBody UserModel userModel) {
         return userService.updateUser(id, userModel);
     }
 
     @DeleteMapping("/users/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public Mono<Void> deleteUser(@PathVariable("id") Long id) {
+    public Mono<Void> deleteUser(@PathVariable("id") String id) {
         return userService.deleteUser(id);
     }
 
