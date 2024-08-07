@@ -1,6 +1,7 @@
 package store.ggun.gateway.domain.model;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import java.util.Collection;
 import java.util.Map;
 
+@Slf4j
 @Getter
 public class PrincipalUserDetails implements UserDetails, OAuth2User {
     private UserModel user;
@@ -30,6 +32,7 @@ public class PrincipalUserDetails implements UserDetails, OAuth2User {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+        log.info("getAuthorities"+user.getRoles());
         return user.getRoles().stream().map(i -> new SimpleGrantedAuthority(i.name())).toList();
     }
     @Override
@@ -38,6 +41,6 @@ public class PrincipalUserDetails implements UserDetails, OAuth2User {
     }
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return user.getUsername();
     }
 }

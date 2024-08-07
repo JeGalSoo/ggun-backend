@@ -19,7 +19,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService  {
 
-    private final TokenProvider jwtProvider;
+//    private final TokenProvider jwtProvider;
     private final TokenServiceImpl tokenService;
     @Value("${jwt.expiration.access}")
     private long accessTokenExpiration;
@@ -70,21 +70,21 @@ public class UserService  {
         return userRepository.findByLastName(lastName);
     }
 
-    public Mono<Messenger> login(UserModel userModel) {
-        var accessToken = jwtProvider.generateToken(null, userModel, "accessToken");
-        var refreshToken = jwtProvider.generateToken(null, userModel, "refreshToken");
-        tokenService.saveRefrshToken(userModel.getEmail(), refreshToken, refreshTokenExpiration);
-        return userRepository.findByEmail(userModel.getEmail())
-                .filter(i -> i.getPassword().equals(userModel.getPassword()))
-                .map(i -> UserDto.builder().email(i.getEmail()).firstName(i.getFirstName()).lastName(i.getLastName()).build())
-                .map(i -> Messenger.builder().message("SUCCESS").data(i)
-                        .accessToken(accessToken)
-                        .refreshToken(refreshToken)
-                        .accessTokenExpire(accessTokenExpiration)
-                        .refreshTokenExpire(refreshTokenExpiration)
-                        .build())
+//    public Mono<Messenger> login(UserModel userModel) {
+//        var accessToken = jwtProvider.generateToken(null, userModel, "accessToken");
+//        var refreshToken = jwtProvider.generateToken(null, userModel, "refreshToken");
+//        tokenService.saveRefrshToken(userModel.getEmail(), refreshToken, refreshTokenExpiration);
+//        return userRepository.findByEmail(userModel.getEmail())
+//                .filter(i -> i.getPassword().equals(userModel.getPassword()))
+//                .map(i -> UserDto.builder().email(i.getEmail()).firstName(i.getFirstName()).lastName(i.getLastName()).build())
+//                .map(i -> Messenger.builder().message("SUCCESS").data(i)
+//                        .accessToken(accessToken)
+//                        .refreshToken(refreshToken)
+//                        .accessTokenExpire(accessTokenExpiration)
+//                        .refreshTokenExpire(refreshTokenExpiration)
+//                        .build())
 
-                ;
-    }
+//                ;
+//    }
 
 }

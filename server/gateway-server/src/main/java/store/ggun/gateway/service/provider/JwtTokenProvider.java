@@ -68,6 +68,7 @@ public class JwtTokenProvider{
     }
 
     public Mono<String> generateToken(PrincipalUserDetails userDetails, boolean isRefreshToken){
+        log.info("토큰임1"+userDetails.getUsername());
         return Mono.just(generateToken(Map.of(), userDetails, isRefreshToken))
                 .flatMap(token ->
                         isRefreshToken
@@ -77,6 +78,8 @@ public class JwtTokenProvider{
     }
 
     private String generateToken(Map<String, Object> extraClaims, PrincipalUserDetails userDetails, boolean isRefreshToken){
+        log.info("토큰임2"+userDetails.getUsername());
+        log.info("토큰임12"+userDetails.getAuthorities());
         return Jwts.builder()
                 .claims(extraClaims)
                 .subject(userDetails.getUsername())

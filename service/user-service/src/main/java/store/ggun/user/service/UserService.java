@@ -1,6 +1,7 @@
 package store.ggun.user.service;
 
 
+import store.ggun.user.domain.PrincipalUserDetails;
 import store.ggun.user.domain.TokenVo;
 import store.ggun.user.domain.UserDto;
 import store.ggun.user.domain.UserModel;
@@ -23,7 +24,7 @@ public interface UserService {
                 .asset(dto.getAsset())
                 .color(dto.getColor())
                 .investmentPropensity(dto.getInvestmentPropensity())
-                .role(dto.getRole())
+                .roles(dto.getRoles())
                 .build();
     }
 
@@ -43,13 +44,13 @@ public interface UserService {
                 .asset(model.getAsset())
                 .color(model.getColor())
                 .investmentPropensity(model.getInvestmentPropensity())
-                .role(model.getRole())
+                .roles(model.getRoles())
                 .build();
     }
 
     TokenVo join(UserDto param);
 
-    UserDto login(UserDto userDto);
+    PrincipalUserDetails login(UserDto userDto);
 
     TokenVo modify(UserDto userDto);
 

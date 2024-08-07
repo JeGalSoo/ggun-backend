@@ -4,12 +4,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import store.ggun.user.domain.PrincipalUserDetails;
 import store.ggun.user.domain.TokenVo;
 import store.ggun.user.domain.UserDto;
 import store.ggun.user.domain.UserModel;
+import store.ggun.user.domain.vo.GatewayUser;
+import store.ggun.user.domain.vo.Role;
 import store.ggun.user.repository.UserRepository;
 import store.ggun.user.service.UserService;
 
+import java.util.List;
 
 
 @Slf4j
@@ -25,7 +29,7 @@ public class UserServiceImpl implements UserService {
         if (!userRepository.existsByUsername(param.getUsername())){
         UserModel userModel = dtoToEntity(param);
         userModel.setPassword(passwordEncoder.encode(userModel.getPassword()));
-        userModel.setRole("ROLE_USER");
+        userModel.setRoles(Role.valueOf("ROLE_USER"));
         userRepository.save(userModel);
         return TokenVo.builder()
                 .message(userRepository.existsByUsername(param.getUsername())?"SUCCESS":"FAIL")
@@ -37,13 +41,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto login(UserDto userDto){ // exception으로 던지는 것도 고려해봐야됨 + 이미 로그인 되있는 상태면 어떻게 처리할껀지(다수 로그인 인정? or 에러?)
+    public PrincipalUserDetails login(UserDto userDto){ // exception으로 던지는 것도 고려해봐야됨 + 이미 로그인 되있는 상태면 어떻게 처리할껀지(다수 로그인 인정? or 에러?)
         UserModel user = userRepository.findByUsernames(userDto.getEmail());
         if (user.getId() == null) {
             return null;
         }else {
             if (passwordEncoder.matches(userDto.getPassword(), user.getPassword())) {
-                return entityToDto(user);
+                return new PrincipalUserDetails(GatewayUser.builder()
+                        .id(user.getId())
+                        .username(user.getUsername())
+                        .email(user.getEmail())
+                        .roles(List.of(user.getRoles()))
+                        .name(user.getName())
+                        .registration(user.getRegistration())
+                        .build());
             }else {
                 return null;
             }

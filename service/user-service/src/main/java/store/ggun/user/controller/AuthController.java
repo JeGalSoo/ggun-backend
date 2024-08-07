@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import store.ggun.user.domain.PrincipalUserDetails;
 import store.ggun.user.domain.TokenVo;
 import store.ggun.user.domain.UserDto;
 import store.ggun.user.repository.UserRepository;
@@ -32,6 +33,7 @@ public class AuthController {
     public String test(){
         return "helteho";
     }
+
     @PostMapping("/oauth")
     public Long oauth(@RequestBody String email) {
         return userRepository.findByEmailOauth(email);
@@ -50,7 +52,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserDto> login(@RequestBody UserDto userDto){
+    public ResponseEntity<PrincipalUserDetails> login(@RequestBody UserDto userDto){
         return ResponseEntity.ok(userService.login(userDto));
     }
 

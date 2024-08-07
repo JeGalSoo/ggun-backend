@@ -19,10 +19,10 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("/login")
-    public Mono<Messenger> login(@RequestBody UserModel param) {
-        return userService.login(param).defaultIfEmpty(Messenger.builder().message("FAILURE").build());
-    }
+//    @PostMapping("/login")
+//    public Mono<Messenger> login(@RequestBody UserModel param) {
+//        return userService.login(param).defaultIfEmpty(Messenger.builder().message("FAILURE").build());
+//    }
 
 
 
