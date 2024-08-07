@@ -58,5 +58,7 @@ public interface TradeService extends CommandService<TradeDto>, QueryService<Tra
 
     List<TradeDto> findByAcno(Long acno);
 
-    List<TradeDto> findByProductNo(String pdno);
+    List<TradeDto> findByProductName(String pdno);
+
+    List<TradeDto> findByDate(String start,String end);
 }

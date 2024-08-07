@@ -7,8 +7,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @NoArgsConstructor
@@ -39,7 +39,7 @@ public class UserModel extends BaseEntity implements UserDetails, Serializable {
     private String token;
     private String role;
 
-    @OneToMany(mappedBy = "writerId")
+    @OneToMany(mappedBy = "writerId", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<ArticleModel> articles;
 
     public UserModel(Long id, String role) {
@@ -59,10 +59,9 @@ public class UserModel extends BaseEntity implements UserDetails, Serializable {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority(this.role));
-        return authorities;
+        return Collections.singletonList(new SimpleGrantedAuthority("ROLE_" + this.role));
     }
+
 
     @Override
     public boolean isAccountNonExpired() {

@@ -1,6 +1,7 @@
 package store.ggun.gateway.filter;
-import java.util.List;
 
+import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -9,12 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
-
-import lombok.Data;
-import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
 import store.ggun.gateway.domain.vo.Role;
 import store.ggun.gateway.service.provider.JwtTokenProvider;
+
+import java.util.List;
 
 
 @Slf4j
@@ -38,26 +38,23 @@ public class AuthorizationHeaderFilter extends AbstractGatewayFilterFactory<Auth
     @Override
     public GatewayFilter apply(Config config) {
         return ((exchange, chain) -> {
-            log.info("Request URL: {}", exchange.getRequest().getURI());
             if(!exchange.getRequest().getHeaders().containsKey(HttpHeaders.AUTHORIZATION))
                 return onError(exchange, HttpStatus.UNAUTHORIZED, "No Authorization Header");
 
             @SuppressWarnings("null")
             String token = exchange.getRequest().getHeaders().get(HttpHeaders.AUTHORIZATION).get(0);
-
             if(token == null)
                 return onError(exchange, HttpStatus.UNAUTHORIZED, "No Token or Invalid Token");
 
             String jwt = jwtTokenProvider.removeBearer(token);
-
             if(!jwtTokenProvider.isTokenValid(jwt, false))
                 return onError(exchange, HttpStatus.UNAUTHORIZED, "Invalid Token");
+            Role roles = Role.valueOf(jwtTokenProvider.extractRoles(jwt).get(0));
 
-            List<Role> roles = jwtTokenProvider.extractRoles(jwt).stream().map(i -> Role.valueOf(i)).toList();
-
-            for(var i : config.getRoles()){
-                if(roles.contains(i))
+            for(Role i : config.getRoles()){
+                if(String.valueOf(roles).equals(String.valueOf(i))){
                     return chain.filter(exchange);
+                }
             }
 
             return onError(exchange, HttpStatus.UNAUTHORIZED, "No Permission");

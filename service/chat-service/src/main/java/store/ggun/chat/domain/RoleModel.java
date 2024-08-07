@@ -1,7 +1,9 @@
 package store.ggun.chat.domain;
 
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.io.Serializable;

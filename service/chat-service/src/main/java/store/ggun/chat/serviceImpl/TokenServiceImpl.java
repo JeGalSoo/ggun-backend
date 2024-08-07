@@ -2,10 +2,10 @@ package store.ggun.chat.serviceImpl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 import store.ggun.chat.domain.TokenModel;
 import store.ggun.chat.repository.TokenRepository;
-import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.Date;
@@ -24,8 +24,6 @@ public class TokenServiceImpl {
                 .refreshToken(refreshToken)
                 .expiration(Date.from(Instant.now().plusSeconds(refreshTokenExpiration)))
                 .build();
-
-        log.info("service - tokenmodel token : {}",token);
         tokenRepository.save(token)
                 .flatMap(i -> Mono.just(i.getRefreshToken())).subscribe();
 

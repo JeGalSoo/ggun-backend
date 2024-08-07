@@ -46,8 +46,6 @@ dependencies {
     // AMQP
 //    implementation 'org.springframework.boot:spring-boot-starter-amqp'
 
-    // Security
-    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     // Actuator
     implementation 'org.springframework.boot:spring-boot-starter-actuator'

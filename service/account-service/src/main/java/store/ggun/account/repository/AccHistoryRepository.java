@@ -13,6 +13,5 @@ import java.util.List;
 public interface AccHistoryRepository extends JpaRepository<AccHistoryModel,Long> {
 
 
-//    List<AccHistoryModel> findByAccountId(Long id);
     Page<AccHistoryModel> findByAccountId(Long id, Pageable pageable);
 }

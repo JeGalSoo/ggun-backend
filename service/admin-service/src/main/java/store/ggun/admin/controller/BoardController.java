@@ -1,20 +1,19 @@
 package store.ggun.admin.controller;
+
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import store.ggun.admin.domain.dto.BoardDto;
-import store.ggun.admin.serviceImpl.BoardServiceImpl;
 import store.ggun.admin.domain.model.Messenger;
 import store.ggun.admin.pagination.PageRequestVo;
+import store.ggun.admin.serviceImpl.BoardServiceImpl;
+
 import java.sql.SQLException;
 import java.util.List;
 
-
-import org.springframework.http.ResponseEntity;
-import lombok.RequiredArgsConstructor;
-
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 @ApiResponses(value = {
@@ -57,6 +56,7 @@ public class BoardController {
     public ResponseEntity<Long> count()  {
         return ResponseEntity.ok(service.count());
     }
+
     @GetMapping("/exists/{id}")
     public ResponseEntity<Messenger> existsById(PageRequestVo vo){
         service.existsById(0L);

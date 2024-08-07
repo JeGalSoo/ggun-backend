@@ -1,6 +1,7 @@
 package store.ggun.admin.service;
-import store.ggun.admin.domain.model.BoardModel;
+
 import store.ggun.admin.domain.dto.BoardDto;
+import store.ggun.admin.domain.model.BoardModel;
 
 public interface BoardService extends CommandService<BoardDto>, QueryService<BoardDto> {
 

@@ -1,17 +1,16 @@
 package store.ggun.admin.serviceImpl;
+
+import jakarta.transaction.Transactional;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import store.ggun.admin.domain.dto.BoardDto;
+import store.ggun.admin.domain.model.Messenger;
+import store.ggun.admin.repository.jpa.BoardRepository;
+import store.ggun.admin.service.BoardService;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
-import store.ggun.admin.domain.model.Messenger;
-import store.ggun.admin.service.BoardService;
-import jakarta.transaction.Transactional;
-import org.springframework.stereotype.Service;
-import store.ggun.admin.domain.dto.BoardDto;
-import store.ggun.admin.repository.jpa.BoardRepository;
-
-
-
-import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class BoardServiceImpl implements BoardService {

@@ -1,16 +1,15 @@
 package store.ggun.alarm.config;
 
-import java.util.List;
-
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
-
-import lombok.RequiredArgsConstructor;
 import store.ggun.alarm.domain.model.RoleModel;
 import store.ggun.alarm.domain.model.RoomModel;
 import store.ggun.alarm.domain.model.UserModel;
+
+import java.util.List;
 
 @Configuration
 @RequiredArgsConstructor
@@ -29,10 +28,10 @@ public class FluxChatMongoConfig {
                                     UserModel.builder()
                                             .email("admin2@admin")
                                             .password("admin2")
-                                            .firstName("jin")
-                                            .lastName("heo")
+                                            .firstName("heo")
+                                            .lastName("jin")
                                             .profile("test url2")
-                                            .roles(List.of(RoleModel.SUPER_ADMIN, RoleModel.ADMIN, RoleModel.USER))
+                                            .roles(List.of(RoleModel.ROLE_ADMIN, RoleModel.ROLE_USER, RoleModel.ROLE_GUEST))
                                             .build()
                             )
                     ))

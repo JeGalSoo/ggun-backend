@@ -1,12 +1,14 @@
 package store.ggun.admin.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Map;
-@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequiredArgsConstructor
 public class HomeController {
@@ -15,7 +17,7 @@ public class HomeController {
 
     @GetMapping("/admins/test")
     public String hello(){
-        return Date + "Welcome To admin service";
+        return Date + " " + "Welcome To admin service";
     }
     @PostMapping("/name")
     public Map<String, ?> name(@RequestBody Map<String,?> map){

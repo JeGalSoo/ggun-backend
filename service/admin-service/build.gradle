@@ -43,14 +43,12 @@ dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    implementation group: 'org.jsoup', name: 'jsoup', version: '1.17.2'
     implementation 'org.jsoup:jsoup:1.17.2'
     implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.2.0'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.10.2'
     implementation 'org.apache.logging.log4j:log4j-api:2.23.1'
     implementation 'org.apache.logging.log4j:log4j-core:2.23.1'
-    implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.mapstruct:mapstruct:1.4.2.Final'
     annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
     implementation 'org.springframework.boot:spring-boot-starter-mail'
@@ -77,6 +75,11 @@ dependencies {
     implementation 'org.webjars:sockjs-client:1.1.2'
     implementation 'org.webjars:stomp-websocket:2.3.3-1'
     implementation 'com.google.code.gson:gson:2.8.0'
+
+
+    // spring security
+//    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-security'
+//    implementation group: 'org.springframework.security', name: 'spring-security-core'
 
     //eureka
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-eureka-client', version: '4.1.2'

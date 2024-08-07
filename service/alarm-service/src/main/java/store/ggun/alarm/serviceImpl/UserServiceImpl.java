@@ -1,14 +1,15 @@
 package store.ggun.alarm.serviceImpl;
-import java.util.Optional;
+
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-//import store.ggun.admin.security.component.JwtProvider;
 import store.ggun.alarm.domain.model.Messenger;
 import store.ggun.alarm.domain.model.UserModel;
 import store.ggun.alarm.repository.UserRepository;
+
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -17,7 +18,9 @@ public class UserServiceImpl {
 
 
     private final UserRepository userRepository;
-;
+
+    private final TokenServiceImpl tokenServiceImpl;
+
 
     public Flux<UserModel> getAllUsers() {
         return userRepository.findAll();
@@ -60,5 +63,4 @@ public class UserServiceImpl {
     public Flux<UserModel> findByLastName(String lastName) {
         return userRepository.findByLastName(lastName);
     }
-
 }

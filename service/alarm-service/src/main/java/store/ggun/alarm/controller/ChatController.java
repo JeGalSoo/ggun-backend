@@ -1,14 +1,15 @@
 package store.ggun.alarm.controller;
-import org.springframework.http.codec.ServerSentEvent;
-import org.springframework.web.bind.annotation.*;
+
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.codec.ServerSentEvent;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import store.ggun.alarm.domain.dto.ChatDto;
 import store.ggun.alarm.domain.dto.RoomDto;
-import store.ggun.alarm.exception.ChatException;
 import store.ggun.alarm.domain.model.RoomModel;
+import store.ggun.alarm.exception.ChatException;
 import store.ggun.alarm.service.RoomService;
 
 @Slf4j
@@ -17,9 +18,8 @@ import store.ggun.alarm.service.RoomService;
 @RequestMapping("/chats")
 @RequiredArgsConstructor
 public class ChatController {
+
     private final RoomService roomService;
-
-
 
     @GetMapping("/checkServer")
     public Mono<String> getMethodName() {
@@ -39,7 +39,6 @@ public class ChatController {
         log.info("Find all rooms");
         return roomService.findAll();
     }
-
 
     @GetMapping("/recieve/{roomId}")
     public Flux<ServerSentEvent<ChatDto>> subscribeByRoomId(@PathVariable String roomId) {

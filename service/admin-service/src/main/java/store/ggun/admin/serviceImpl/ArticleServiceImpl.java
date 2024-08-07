@@ -1,16 +1,18 @@
 package store.ggun.admin.serviceImpl;
-import store.ggun.admin.domain.model.ArticleModel;
-import store.ggun.admin.domain.dto.ArticleDto;
-import store.ggun.admin.repository.jpa.ArticleRepository;
-import store.ggun.admin.domain.model.BoardModel;
-import store.ggun.admin.repository.jpa.BoardRepository;
-import store.ggun.admin.domain.model.Messenger;
-import store.ggun.admin.domain.model.AdminModel;
-import store.ggun.admin.repository.jpa.AdminRepository;
-import store.ggun.admin.service.ArticleService;
+
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import store.ggun.admin.domain.dto.ArticleDto;
+import store.ggun.admin.domain.model.AdminModel;
+import store.ggun.admin.domain.model.ArticleModel;
+import store.ggun.admin.domain.model.BoardModel;
+import store.ggun.admin.domain.model.Messenger;
+import store.ggun.admin.repository.jpa.AdminRepository;
+import store.ggun.admin.repository.jpa.ArticleRepository;
+import store.ggun.admin.repository.jpa.BoardRepository;
+import store.ggun.admin.service.ArticleService;
+
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
@@ -62,11 +64,6 @@ public class ArticleServiceImpl implements ArticleService {
                 .build();
 
     }
-
-//        articleRepository.save(dtoToEntity(dto, boardRepository, userRepository));
-//        return Messenger.builder()
-//                .message("성공")
-//                .build();
 
     @Override
     public List<ArticleDto> findAll() throws SQLException {
