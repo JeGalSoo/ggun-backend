@@ -42,17 +42,3 @@ Facebook의 Prophet 모델을 사용하여 10일 후의 주가를 예측합니�
 모의투자 및 성능 평가, 비교 분석
 
 한국투자증권 모의투자 API를 사용하여 수강생 10명의 계좌를 개설, 투자 성향에 맞춰 모의투자를 진행합니다. 예측된 주가와 실제 모의투자를 비교 분석하여 AI 모델의 성능을 평가합니다.
-
-## 기술 스택
-### [Backend]
-
-Framework: Spring Boot (MVC, WebFlux, Security, Data JPA, Cloud Config, Cloud Gateway, Cloud Netflix Eureka, JWT, OAuth2.0, FastAPI
-
-Database: MySQL, MongoDB, Redis
-
-### [DevOps]
-
-Tools: Jenkins, Docker, Kubernetes, Synology NAS, GitHub, intelliJ
-### [협업 도구]
-
-Tools: Github, Slack, Jira, Notion
